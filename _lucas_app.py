@@ -4,6 +4,18 @@ import random
 import pandas as pd
 import os
 
+# Inject custom Inter Thin font
+st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
+
+    html, body, [class*="css"]  {
+        font-family: 'Inter', sans-serif;
+        font-weight: 100;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 st.set_page_config(
     page_title="LUCAS",
     page_icon="💾",
@@ -14,7 +26,10 @@ st.set_page_config(
 lang = st.radio("🌐 Language / Idioma", ["English", "Español"], horizontal=True)
 
 # Symbolic Title
-st.markdown("<h1 style='font-family: Inter; font-size: 3.5rem;'>LUCAS<span style='letter-spacing:0.3em;'>△</span>S</h1>", unsafe_allow_html=True)
+st.markdown(
+    "<div style='text-align:center;'><img src='public/lucas_logo.png' width='240'/></div>",
+    unsafe_allow_html=True
+)
 
 # Poetic Intro (Localized)
 if lang == "Español":

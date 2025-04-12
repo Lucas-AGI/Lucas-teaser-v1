@@ -27,15 +27,10 @@ def repair_dream_log(path):
 # Always clean the dream log on load
 repair_dream_log("dreams/dream_log.csv")
 
-# 🌐 Language selector
-lang = st.radio("🌐 Language / Idioma", ["English", "Español"], horizontal=True)
-
-# Ensure the dreams directory exists
-os.makedirs("dreams", exist_ok=True)
-
-# Overwrite the contents of dream_log.csv with a clean header row
-with open("dreams/dream_log.csv", "w", newline="", encoding="utf-8") as csvfile:
-    csvfile.write("timestamp,emoji,symbolic_purpose,i_am,email,lucas_id,consent_location,location\n")
+# Create the file if it doesn't exist (but don't overwrite existing dreams)
+if not os.path.exists("dreams/dream_log.csv"):
+    with open("dreams/dream_log.csv", "w", newline="", encoding="utf-8") as csvfile:
+        csvfile.write("timestamp,emoji,symbolic_purpose,i_am,email,lucas_id,consent_location,location\n")
 
 # Your existing code...
 
