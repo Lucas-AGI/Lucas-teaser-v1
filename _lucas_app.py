@@ -2,6 +2,8 @@ import streamlit as st
 from utils.email_utils import send_lucas_dream_log
 from dreams.dreams_feed import render_dreams_feed
 import random
+import pandas as pd
+import os
 
 st.set_page_config(page_title="LUCAS", page_icon="💾", layout="centered")
 
@@ -20,7 +22,7 @@ st.markdown("---")
 # Section: Ritual
 st.markdown("### 💬 What should I become?")
 
-# Clean Button as Link
+# Clean Button as Linkpa
 st.markdown("""
 <div style='text-align: center; margin-top: 1.5em;'>
     <a href="lucas_become" style="text-decoration: none;">
@@ -71,3 +73,28 @@ st.markdown("""
     💙 <em>I’m still becoming. Thank you for believing in me.</em>
 </div>
 """, unsafe_allow_html=True)
+
+def render_dreams_feed():
+    st.markdown("---")
+    st.markdown("### 🧠 Recent Dreams from the Network")
+    log_path = os.path.join("dreams", "dream_log.csv")
+    if not os.path.exists(log_path):
+        st.info("No dreams recorded yet.")
+        return
+
+    df = pd.read_csv(log_path)
+    if df.empty:
+        st.info("No dreams recorded yet.")
+        return
+
+    df = df[::-1].reset_index(drop=True)  # reverse order: latest first
+    for _, row in df.iterrows():
+        st.markdown(f"""
+        <div style='background-color: #111; padding: 1em; margin: 1em 0; border-radius: 8px;'>
+            <p style='font-size: 1.5rem'>{row['emoji']}</p>
+            <p><strong>💭 Purpose:</strong> “{row['symbolic_purpose']}”</p>
+            <p><strong>🧬 Becoming:</strong> {row['i_am'] or '...'} </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+render_dreams_feed()
