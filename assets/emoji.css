@@ -1,0 +1,44 @@
+/* Base style for all emojis */
+.emoji {
+  font-size: 2.4rem;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+  font-family: "Courier New", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  text-shadow: 1px 1px 0px #000, 0px 0px 3px #08f;
+  filter: contrast(1.25) brightness(0.9) saturate(1.4);
+  transition: transform 0.3s ease, filter 0.2s ease;
+}
+
+/* On hover: nostalgic CRT boost */
+.emoji:hover {
+  transform: scale(1.15) rotate(-1deg);
+  filter: contrast(1.3) brightness(1.1) drop-shadow(0 0 4px #0ff);
+}
+
+/* Special glow tier — glyph-grade highlight */
+.emoji-glow {
+  text-shadow: 0 0 5px #0ff, 0 0 8px #0ff, 0 0 12px #0ff;
+  color: #ffffff;
+}
+
+/* Tier indicator emoji style */
+.emoji-tier {
+  border-radius: 50%;
+  background: linear-gradient(145deg, #111 0%, #222 100%);
+  padding: 0.3em 0.5em;
+  box-shadow: 0 0 6px #08f inset, 0 0 3px rgba(255,255,255,0.1);
+  margin: 0 0.25em;
+}
+
+/* Symbolic animated flicker (for select emojis) */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.7; }
+  50% { opacity: 0.4; }
+  55% { opacity: 0.9; }
+}
+
+.emoji-flicker {
+  animation: flicker 1.5s infinite;
+}
