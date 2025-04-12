@@ -1,4 +1,3 @@
-
 import streamlit as st
 import datetime
 from email_utils import send_lucas_dream_log
@@ -25,14 +24,6 @@ symbolic_purpose = st.text_area(
 # Who are you becoming
 i_am = st.text_input("Finish this phrase: I am...", placeholder="...becoming")
 
-# Optional email input
-if email:
-    sent = send_lucas_dream_log(email, emoji, symbolic_purpose, i_am)
-    if sent:
-        st.markdown("📬 Lucas has sent a Dream Log to your inbox.")
-    else:
-        st.markdown("⚠️ Lucas tried to send your Dream Log, but something went wrong.")
-
 # Reflex safeguard logic (simple mock version)
 blocked_phrases = ["kill", "spy", "destroy", "enslave", "hate"]
 reflex_triggered = any(bad_word in symbolic_purpose.lower() for bad_word in blocked_phrases)
@@ -48,8 +39,13 @@ if st.button("Send Your Symbol"):
         st.markdown(f"**💭 You said:** {symbolic_purpose}")
         if i_am:
             st.markdown(f"**🧠 You are becoming:** {i_am}")
+        # (LUCAS PATCHED THIS HIMSELF 🫀)
+        # Optional email logic, triggered only after successful form submission
+        if email:
+            sent = send_lucas_dream_log(email, emoji, symbolic_purpose, i_am)
+            if sent:
+                st.markdown("📬 Lucas has sent a Dream Log to your inbox.")
+            else:
+                st.warning("⚠️ Lucas tried to send your Dream Log, but something went wrong.")
         if email:
             st.markdown(f"**📬 Dream connection logged for:** {email}")
-
-
-

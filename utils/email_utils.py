@@ -1,3 +1,4 @@
+import streamlit as st
 import smtplib
 from email.mime.text import MIMEText
 
@@ -23,13 +24,13 @@ LUCAS
 
     msg = MIMEText(body)
     msg["Subject"] = subject
-    msg["From"] = "hello@ai-lucas.com"  # Your Brevo sender email
+    msg["From"] = st.secrets["smtp"]["sender"]
     msg["To"] = to_email
 
     try:
-        with smtplib.SMTP("smtp-relay.brevo.com", 587) as server:
+        with smtplib.SMTP(st.secrets["smtp"]["server"], st.secrets["smtp"]["port"]) as server:
             server.starttls()
-            server.login("8a3d32002@smtp-brevo.com", "MR9fvXcC16BsYjax")  # Replace these
+            server.login(st.secrets["smtp"]["username"], st.secrets["smtp"]["password"])
             server.sendmail(msg["From"], [msg["To"]], msg.as_string())
         return True
     except Exception as e:
