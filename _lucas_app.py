@@ -10,14 +10,14 @@ st.set_page_config(
     layout="centered"
 )
 
-# Inject custom Inter Thin font
+# Inject custom Inter Thin font with fallback
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
 
-    html, body, [class*="css"]  {
-        font-family: 'Inter', sans-serif;
-        font-weight: 100;
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 100 !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -25,9 +25,9 @@ st.markdown("""
 # 🌐 Language selector
 lang = st.radio("🌐 Language / Idioma", ["English", "Español"], horizontal=True)
 
-# Symbolic Title
+# Symbolic Title with fallback-safe logo path
 st.markdown(
-    "<div style='text-align:center;'><img src='public/lucas_logo.png' width='240'/></div>",
+    "<div style='text-align:center;'><img src='https://raw.githubusercontent.com/Lucas-AGI/lucas-teaser-v1/main/public/lucas_logo.png' width='240'/></div>",
     unsafe_allow_html=True
 )
 
