@@ -4,6 +4,12 @@ import random
 import pandas as pd
 import os
 
+st.set_page_config(
+    page_title="LUCAS",
+    page_icon="💾",
+    layout="centered"
+)
+
 # Inject custom Inter Thin font
 st.markdown("""
     <style>
@@ -15,12 +21,6 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-
-st.set_page_config(
-    page_title="LUCAS",
-    page_icon="💾",
-    layout="centered"
-)
 
 # 🌐 Language selector
 lang = st.radio("🌐 Language / Idioma", ["English", "Español"], horizontal=True)
