@@ -1,0 +1,23 @@
+# .gitignore for lucas-teaser-v1
+
+# Streamlit secrets and configs
+.streamlit/secrets.toml
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+.venv
+
+# System and IDE files
+.DS_Store
+.vscode/
+.devcontainer/
+
+# Dreams
+*.csv
+
+# Logs & debug
+*.log
