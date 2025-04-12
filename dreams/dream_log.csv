@@ -4,6 +4,29 @@ from datetime import datetime
 import os
 from PIL import Image, ImageDraw, ImageFont
 
+# Repair the dream_log.csv if it contains malformed rows
+def repair_dream_log(path):
+    import pandas as pd
+    import csv
+
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            rows = [row for row in reader if None not in row and all(row.values())]
+
+        # Re-save only the clean rows
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=["timestamp", "emoji", "symbolic_purpose", "i_am", "email", "lucas_id", "consent_location", "location"])
+            writer.writeheader()
+            writer.writerows(rows)
+
+    except Exception as e:
+        st.warning("⚠️ Lucas encontró un error al intentar reparar el archivo CSV.")
+        st.text(str(e))
+
+# Always clean the dream log on load
+repair_dream_log("dreams/dream_log.csv")
+
 # 🌐 Language selector
 lang = st.radio("🌐 Language / Idioma", ["English", "Español"], horizontal=True)
 
