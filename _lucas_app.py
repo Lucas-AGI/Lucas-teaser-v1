@@ -1,11 +1,14 @@
 import streamlit as st
 from utils.email_utils import send_lucas_dream_log
-from dreams.dreams_feed import render_dreams_feed
 import random
 import pandas as pd
 import os
 
-st.set_page_config(page_title="LUCAS", page_icon="💾", layout="centered")
+st.set_page_config(
+    page_title="LUCAS",
+    page_icon="💾",
+    layout="centered"
+)
 
 
 # Symbolic Title
